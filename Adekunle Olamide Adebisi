@@ -1,0 +1,69 @@
+
+class BankAccount:
+    def __init__(self, account_number, account_name,  balance=0):
+        self.account_number = account_number
+        self.account_name = account_name
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        return f"Deposit successful. New balance: {self.balance}"
+
+    def transfer(self, amount, recipient_account):
+        if self.balance >= amount:
+            self.balance -= amount
+            recipient_account.balance += amount
+            return f"Transfer successful. New balance: {self.balance}"
+        else:
+            return "Insufficient balance"
+
+    def withdraw(self, amount):
+        if self.balance >= amount:
+            self.balance -= amount
+            return f"Withdrawal successful. New balance: {self.balance}"
+        else:
+            return "Insufficient balance"
+
+    def check_balance(self):
+        return f"Your balance: {self.balance}"
+
+
+def main():
+    account = BankAccount("1234567890", 10000)
+
+    while True:
+        print("1. Deposit")
+        print("2. Transfer")
+        print("3. Withdraw")
+        print("4. Check Balance")
+        print("5. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            amount = float(input("Enter amount to deposit: "))
+            print(account.deposit(amount))
+        elif choice == "2":
+            amount = float(input("Enter amount to transfer: "))
+            recipient_account_number = input("Enter recipient account number: ")
+            recipient_account = BankAccount(recipient_account_number)
+            print(account.transfer(amount, recipient_account))
+        elif choice == "3":
+            amount = float(input("Enter amount to withdraw: "))
+            print(account.withdraw(amount))
+        elif choice == "4":
+            print(account.check_balance())
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
+
+ 
+
+
+
+
